@@ -8,6 +8,7 @@ const HomePage = () => {
 					Welcome to Our Restaurant
 				</h1>
 				<p className="text-lg sm:text-xl mb-8">
+					Indulge in a memorable dining experience with flavors that delight.
 					Book a table and enjoy our special cuisine!
 				</p>
 
