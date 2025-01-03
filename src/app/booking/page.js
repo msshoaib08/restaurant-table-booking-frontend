@@ -35,7 +35,7 @@ const BookingPage = () => {
 		try {
 			const response = await axios.get(
 				`${process.env.NEXT_PUBLIC_API_URL}/available-times`,
-				{ params: { date } }
+				{ params: { date: formattedDate } }
 			);
 
 			const availableSlots = response.data.availableSlots || [];
@@ -88,8 +88,9 @@ const BookingPage = () => {
 		if (!formData.time) {
 			newErrors.time = 'Time is required';
 		} else {
+			const formattedDate = new Date(formData.date).toLocaleDateString('en-GB');
 			const isAvailable = await checkTimeAvailability(
-				formData.date,
+				formattedDate,
 				formData.time
 			);
 			if (!isAvailable) {
