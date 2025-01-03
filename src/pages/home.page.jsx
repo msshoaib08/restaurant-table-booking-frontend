@@ -9,7 +9,7 @@ const HomePage = () => {
 				</h1>
 				<p className="text-lg sm:text-xl mb-8">
 					Indulge in a memorable dining experience with flavors that delight.
-					Book a table and enjoy our special cuisine!
+					Book a table and enjoy our special cuisine.
 				</p>
 
 				<Link href="/booking">
