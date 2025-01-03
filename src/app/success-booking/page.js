@@ -1,34 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import Link from 'next/link';
 
-const BookingSuccessful = () => {
-	const [searchParams, setSearchParams] = useState(null);
-	const params = useSearchParams();
+const BookingDetails = () => {
+	const searchParams = useSearchParams();
 
-	useEffect(() => {
-		const currentParams = {
-			name: params.get('name'),
-			contact: params.get('contact'),
-			date: params.get('date'),
-			time: params.get('time'),
-			guests: params.get('guests'),
-		};
-
-		if (
-			!searchParams ||
-			Object.keys(currentParams).some(
-				(key) => currentParams[key] !== searchParams[key]
-			)
-		) {
-			setSearchParams(currentParams);
-		}
-	}, [params, searchParams]);
-
-	if (!searchParams) return <div>Loading...</div>;
+	const name = searchParams.get('name');
+	const contact = searchParams.get('contact');
+	const date = searchParams.get('date');
+	const time = searchParams.get('time');
+	const guests = searchParams.get('guests');
 
 	return (
 		<section className="bg-gray-900 text-white min-h-screen">
@@ -43,23 +26,23 @@ const BookingSuccessful = () => {
 					<ul className="space-y-2 mt-4">
 						<li>
 							<strong>Customer Name: </strong>
-							{searchParams.name}
+							{name}
 						</li>
 						<li>
 							<strong>Contact Number: </strong>
-							{searchParams.contact}
+							{contact}
 						</li>
 						<li>
 							<strong>Booking Date: </strong>
-							{searchParams.date}
+							{date}
 						</li>
 						<li>
 							<strong>Booking Slot Time: </strong>
-							{searchParams.time}
+							{time}
 						</li>
 						<li>
 							<strong>Number of Guests: </strong>
-							{searchParams.guests}
+							{guests}
 						</li>
 					</ul>
 				</div>
@@ -73,6 +56,14 @@ const BookingSuccessful = () => {
 				</Link>
 			</div>
 		</section>
+	);
+};
+
+const BookingSuccessful = () => {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<BookingDetails />
+		</Suspense>
 	);
 };
 
